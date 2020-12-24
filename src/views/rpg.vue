@@ -47,6 +47,18 @@ export default {
       classid: this.$route.query.rpgId
     };
   },
+   watch: {
+    $route: {
+      handler() {
+        this.classid = this.$route.query.rpgId;
+        this.seachFlagPager();
+        this.dotaRecomment();
+        this.ClassInfoByCid();
+        //深度监听，同时也可监听到param参数变化
+      },
+      deep: true
+    }
+  },
   mounted() {
     // this.classid = this.$route.query.rpgId;
    // console.log(this.$route.query.rpgId);
@@ -157,6 +169,7 @@ export default {
   top: 0px;
   right: 0px;
   transition: 0.5s ease;
+   z-index:1;
 }
 .siderBoxCurrent {
   right: -300px;
