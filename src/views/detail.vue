@@ -5,6 +5,7 @@
       <!-- <span>首页</span>
       <em>></em> -->
       <span>{{detailObj.Goods_disName}}</span>
+        <span v-on:click="back" style="float:right;cursor:pointer;"><<返回</span>
     </div>
     <div class="productInfor">
       <div class="productInfor_left">
@@ -65,7 +66,11 @@
     <div class="siderBox" v-bind:class="{'siderBoxCurrent':!flag}">
       <silderbar-tab v-on:FixedModel="modelFixed" ref="mychild"></silderbar-tab>
     </div>
-    <send-div ref="childrenSend"></send-div>
+    <send-div
+      v-on:parentHandparent1="childrenHand1"
+      v-on:parentPayFor="childrenPayFor"
+      ref="childrenSend"
+    ></send-div>
     <payModel-div ref="payChildren"></payModel-div>
   </div>
 </template>
@@ -146,6 +151,15 @@ export default {
     },
      gmFn(val,c,v){
        this.$refs.payChildren.payChildren(val,c,v);
+    },
+     childrenPayFor(val, c, u) {
+      this.$refs.payChildren.payChildren(val, c, u);
+    },
+    back() {
+      this.$router.go(-1); //返回上一层
+    },
+    childrenHand1(){
+       this.$refs.mychild.parentHandleclick();
     }
   },
   components: {
